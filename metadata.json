@@ -1,0 +1,7 @@
+{
+  "name": "CampusAI - College Help Desk AI & Project Portal",
+  "description": "An advanced AI-powered college help desk chatbot and campus assistance portal, developed by Jagannath Mohapatra (Reg No: 230301120151).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
