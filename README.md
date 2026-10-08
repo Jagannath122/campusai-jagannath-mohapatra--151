@@ -13,7 +13,7 @@ Node.js
 ## Run locally
 
 1. Install dependencies with `npm install`.
-2. Copy `.env.example` to `.env` and set `VITE_GEMINI_API_KEY`.
+2. Copy `.env.example` to `.env` and set `VITE_GEMINI_API_KEY`. Restart the development server after changing `.env`.
 3. Start the Vite development server with `npm run dev`.
 4. Create a production build with `npm run build`.
 
