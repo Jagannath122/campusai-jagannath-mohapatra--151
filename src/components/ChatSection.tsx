@@ -308,9 +308,14 @@ export const ChatSection: React.FC<ChatSectionProps> = ({
       ));
     } catch (err) {
       console.error('Gemini chat error:', err);
-      const detail = err instanceof Error && err.message.startsWith('Missing VITE_GEMINI_API_KEY')
-        ? err.message
-        : 'Gemini could not complete this response. Check the API key restrictions, model access, quota, and network connection, then try again.';
+      const errorMessage = err instanceof Error ? err.message : '';
+      const detail = errorMessage.startsWith('Missing VITE_GEMINI_API_KEY')
+        ? errorMessage
+        : /ACCESS_TOKEN_TYPE_UNSUPPORTED|invalid authentication credentials/i.test(errorMessage)
+          ? 'Google rejected this credential. Create a Gemini API key in Google AI Studio (a Developer API key, not an OAuth token or service-account credential), replace VITE_GEMINI_API_KEY in .env, and restart Vite.'
+          : /(?:\b401\b|\b403\b|api.?key.*(?:invalid|not valid))/i.test(errorMessage)
+            ? 'Google rejected this API key. Check that it is active and allowed to use the Gemini Developer API, then restart Vite after updating .env.'
+            : 'Gemini could not complete this response. Check the API key restrictions, model access, quota, and network connection, then try again.';
       setMessages((previous) => previous.map((message) =>
         message.id === assistantId
           ? {
